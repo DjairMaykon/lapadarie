@@ -26,6 +26,8 @@ describe('OrderService', () => {
         id: 1,
         client: 'Teste',
         amount: 1,
+        createdAt: new Date(),
+        delivered: true,
       };
       jest.spyOn(prisma.order, 'create').mockResolvedValue(order);
 
@@ -45,11 +47,15 @@ describe('OrderService', () => {
           id: 1,
           client: 'Teste',
           amount: 1,
+          createdAt: new Date(),
+          delivered: true,
         },
         {
           id: 2,
           client: 'Teste2',
           amount: 2,
+          createdAt: new Date(),
+          delivered: true,
         },
       ];
       jest.spyOn(prisma.order, 'findMany').mockResolvedValue(orders);
@@ -70,6 +76,8 @@ describe('OrderService', () => {
         id: 1,
         client: 'Teste',
         amount: 1,
+        createdAt: new Date(),
+        delivered: true,
       };
       jest.spyOn(prisma.order, 'findUnique').mockResolvedValue(order);
 
@@ -89,6 +97,8 @@ describe('OrderService', () => {
         id: 1,
         client: 'Teste',
         amount: 1,
+        createdAt: new Date(),
+        delivered: true,
       };
       jest.spyOn(prisma.order, 'findUnique').mockResolvedValue(order);
 
@@ -108,6 +118,8 @@ describe('OrderService', () => {
         id: 1,
         client: 'Teste',
         amount: 1,
+        createdAt: new Date(),
+        delivered: true,
       };
       jest.spyOn(prisma.order, 'findUnique').mockResolvedValue(order);
       jest.spyOn(prisma.order, 'delete').mockResolvedValue(order);

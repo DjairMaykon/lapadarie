@@ -3,13 +3,13 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { OrderController } from './order.controller';
 import { OrderService } from './order.service';
 
-const mockedService = {
-  create: jest.fn().mockResolvedValue({
+const mockedServiceReturn = {
+  create: {
     id: 1,
     client: 'teste',
     amount: 1,
-  }),
-  findAll: jest.fn().mockResolvedValue([
+  },
+  findAll: [
     {
       id: 1,
       client: 'teste',
@@ -20,22 +20,29 @@ const mockedService = {
       client: 'teste 2',
       amount: 2,
     },
-  ]),
-  findOne: jest.fn().mockResolvedValue({
+  ],
+  findOne: {
     id: 1,
     client: 'teste',
     amount: 1,
-  }),
-  update: jest.fn().mockResolvedValue({
+  },
+  update: {
     id: 1,
     client: 'teste',
     amount: 1,
-  }),
-  remove: jest.fn().mockResolvedValue({
+  },
+  remove: {
     id: 1,
     client: 'teste',
     amount: 1,
-  }),
+  },
+};
+const mockedService = {
+  create: jest.fn().mockResolvedValue(mockedServiceReturn.create),
+  findAll: jest.fn().mockResolvedValue(mockedServiceReturn.findAll),
+  findOne: jest.fn().mockResolvedValue(mockedServiceReturn.findOne),
+  update: jest.fn().mockResolvedValue(mockedServiceReturn.update),
+  remove: jest.fn().mockResolvedValue(mockedServiceReturn.remove),
 };
 
 describe('OrderController', () => {
@@ -65,37 +72,25 @@ describe('OrderController', () => {
         client: 'teste',
         amount: 1,
       };
-      expect(controller.create(mockCreateDto)).resolves.toEqual({
-        id: 1,
-        ...mockCreateDto,
-      });
+      expect(controller.create(mockCreateDto)).resolves.toEqual(
+        mockedServiceReturn.create,
+      );
     });
   });
 
   describe('getAll', () => {
     it('should return all orders', () => {
-      expect(controller.findAll()).resolves.toEqual([
-        {
-          id: 1,
-          client: 'teste',
-          amount: 1,
-        },
-        {
-          id: 2,
-          client: 'teste 2',
-          amount: 2,
-        },
-      ]);
+      expect(controller.findAll()).resolves.toEqual(
+        mockedServiceReturn.findAll,
+      );
     });
   });
 
   describe('findOne', () => {
     it('should return one order if id exists', () => {
-      expect(controller.findOne(1)).resolves.toEqual({
-        id: 1,
-        client: 'teste',
-        amount: 1,
-      });
+      expect(controller.findOne(1)).resolves.toEqual(
+        mockedServiceReturn.findOne,
+      );
     });
 
     it('should return a error if id not exists', () => {
@@ -109,11 +104,13 @@ describe('OrderController', () => {
 
   describe('update', () => {
     it('should update order if id exists', () => {
-      expect(controller.update(1, {})).resolves.toEqual({
-        id: 1,
+      const mockUpdateDto = {
         client: 'teste',
         amount: 1,
-      });
+      };
+      expect(controller.update(1, mockUpdateDto)).resolves.toEqual(
+        mockedServiceReturn.update,
+      );
     });
 
     it('should return a error if id not exists', () => {
@@ -127,11 +124,7 @@ describe('OrderController', () => {
 
   describe('remove', () => {
     it('should remove order if id exists', () => {
-      expect(controller.remove(1)).resolves.toEqual({
-        id: 1,
-        client: 'teste',
-        amount: 1,
-      });
+      expect(controller.remove(1)).resolves.toEqual(mockedServiceReturn.remove);
     });
 
     it('should return a error if id not exists', () => {
