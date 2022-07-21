@@ -1,0 +1,27 @@
+.queue {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+@media (min-width: 940px) {
+  .queue {
+    gap: 25px;
+  }
+}
+
+.queue .add-item {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+
+  color: #5f3305;
+
+  cursor: pointer;
+}
+
+.queue .items {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}

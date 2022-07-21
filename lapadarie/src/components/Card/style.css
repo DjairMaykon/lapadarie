@@ -1,0 +1,37 @@
+.card {
+  min-width: 330px;
+  width: 80vw;
+  border-radius: 5px;
+
+  padding: 19px 29px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+@media (min-width: 940px) {
+  .card {
+    max-width: 395px;
+    min-width: auto;
+    width: 25vw;
+  }
+}
+
+.card header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card header .card-title {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.card .card-content {
+  font-weight: 500;
+  font-size: 36px;
+  line-height: 54px;
+}

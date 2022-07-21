@@ -1,0 +1,98 @@
+.item {
+  padding: 15px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 5px;
+
+  color: #5f3305;
+}
+
+.item header {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.item header .checkbox-icon {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  font-size: 20px;
+  width: 16px;
+  height: 16px;
+}
+input[type="checkbox"] {
+  visibility: hidden;
+}
+.geekmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 16px;
+  width: 16px;
+  background-color: transparent;
+  border: 2px solid #5f3305;
+}
+.geekmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+.item header .checkbox-icon input:checked ~ .geekmark:after {
+  display: block;
+}
+.item header .checkbox-icon .geekmark:after {
+  left: 2px;
+  bottom: 2px;
+  width: 4px;
+  height: 6px;
+  border: solid #5f3305;
+  border-width: 0 4px 4px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.item header .item-title {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.item header .item-time {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+@media (min-width: 1080px) {
+  .item .item-content {
+    display: flex;
+    gap: 15px;
+  }
+}
+
+.item .item-content h2 {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.item .item-content h2 strong {
+  font-weight: 700;
+}
+
+.item .icons {
+  display: flex;
+  gap: 15px;
+  flex: 1;
+  justify-content: end;
+}
+
+.item .icons a {
+  cursor: pointer;
+}
