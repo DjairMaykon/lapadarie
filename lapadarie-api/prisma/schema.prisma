@@ -16,3 +16,12 @@ model Order {
 
   @@map("order")
 }
+
+model Product {
+  id          Int      @id @default(autoincrement())
+  createdAt   DateTime @default(now())
+  price       Decimal
+  description String
+
+  @@map("product")
+}
