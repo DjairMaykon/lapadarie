@@ -24,12 +24,13 @@ model Product {
   price       Decimal
   description String
   orderItem   OrderItem[]
+  Inventory   Inventory?
 
   @@map("product")
 }
 
 model OrderItem {
-  order     Order    @relation(fields: [orderId], references: [id])
+  order     Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
   orderId   Int
   product   Product  @relation(fields: [productId], references: [id])
   productId Int
@@ -38,4 +39,26 @@ model OrderItem {
 
   @@id([orderId, productId])
   @@map("order_item")
+}
+
+model Inventory {
+  id        Int                @id @default(autoincrement())
+  product   Product            @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId Int                @unique
+  amount    Int                @default(0)
+  history   InventoryHistory[]
+  createdAt DateTime           @default(now())
+
+  @@map("inventory")
+}
+
+model InventoryHistory {
+  id          Int       @id @default(autoincrement())
+  inventory   Inventory @relation(fields: [inventoryId], references: [id], onDelete: Cascade)
+  inventoryId Int
+  entryDate   DateTime  @default(now())
+  entryAmount Int
+  createdAt   DateTime  @default(now())
+
+  @@map("inventory_hisstory")
 }
